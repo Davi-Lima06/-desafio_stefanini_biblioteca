@@ -1,0 +1,57 @@
+<mat-form-field class="example-full-width espaco" appearance="fill">
+  <mat-label>pesquisar na tabela</mat-label>
+  <input matInput placeholder="Pesquisar Cliente" #input1
+  (keyup)="applyFilter($event)" >
+</mat-form-field>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Header and Row Declarations -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  <!-- User name Definition -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.nome}} </mat-cell>
+  </ng-container>
+
+  <!-- Age Definition -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
+    <mat-cell  *matCellDef="let row"> {{row.email}} </mat-cell>
+  </ng-container>
+
+  <!-- Title Definition -->
+  <ng-container matColumnDef="contato">
+    <mat-header-cell *matHeaderCellDef> Contato </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.contato}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef style="width:180px"> Ações </mat-header-cell>
+    <mat-cell *matCellDef="let row" style="width:180px">
+      <button routerLink="/clientes/editar/{{row.email}}" mat-raised-button color="accent" class="me-2">
+        Editar&nbsp;
+      </button>
+      <button routerLink="/clientes/deletar/{{row.email}}" mat-raised-button color="warn" class="">
+        Excluir&nbsp;&nbsp;&nbsp;
+      </button>
+
+    </mat-cell>
+  </ng-container>
+
+</mat-table>
+<mat-paginator [length]="tamanho"
+              [pageSize]="5"
+              [pageSizeOptions]="[5]"
+              aria-label="Select page">
+</mat-paginator>
+<br>
+<div class="w-100 mb-3">
+  <button routerLink="/clientes/cadastrar" mat-raised-button color="primary" class="">
+    Cadastrar novo cliente
+  </button>
+</div>
+
+
+

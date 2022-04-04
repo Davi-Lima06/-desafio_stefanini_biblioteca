@@ -1,0 +1,107 @@
+<mat-card class="card">
+
+  <form class="container" [formGroup]="novoClienteForm" (submit)="submit(form)" #form="ngForm">
+    <mat-card-title>Cadastro de Livros</mat-card-title>
+      <mat-form-field appearance="fill">
+
+        <input
+          matInput
+          name="nomeLivro"
+          placeholder="Nome completo" required
+          formControlName="nomeLivro"
+        />
+        <!-- <app-mensagem *ngIf="novoClienteForm.get('nome')?.errors?.['required'] &&
+        novoClienteForm.get('nome')?.touched" mensagem="nome é obrigatório">
+        </app-mensagem>
+        <app-mensagem *ngIf="novoClienteForm.get('nome')?.errors?.['maxlength'] &&
+        novoClienteForm.get('nome')?.touched" mensagem="máximo de 50 caracteres">
+        </app-mensagem> -->
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          name="nomeEditora"
+          placeholder="nome da editora"
+          formControlName="nomeEditora" required
+        />
+        <!-- <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['required'] &&
+        novoClienteForm.get('email')?.touched" mensagem="email é obrigatório">
+        </app-mensagem>
+        <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['email'] &&
+        novoClienteForm.get('email')?.touched" mensagem="formato de email inválido">
+        </app-mensagem> -->
+        <!-- <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['emailExiste'] &&
+        novoClienteForm.get('email')?.touched" mensagem="email já cadastrado">
+        </app-mensagem> -->
+      </mat-form-field>
+
+      <!-- <mat-form-field >
+        <input
+          matInput
+          name="autor"
+          placeholder="autor"
+          formControlName="autor"
+        />
+      </mat-form-field> -->
+
+      <!-- <mat-form-field appearance="fill">
+        <mat-label>Toppings</mat-label>
+        <mat-select formControlName="autor" multiple>
+          <mat-select-trigger>
+            {{toppings.value ? toppings.value[0] : ''}}
+            <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+              (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let topping of autor" [value]="topping">{{topping.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+      <mat-form-field appearance="fill">
+        <mat-label>Select an option</mat-label>
+        <mat-select disableRipple formControlName="autor">
+          <mat-option *ngFor="let topping of autor" [value]="topping">{{topping.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field >
+        <input
+        type="date"
+        matInput
+        name="anoPublicacao"
+        placeholder="ano de publicação"
+        formControlName="anoPublicacao"
+        />
+      </mat-form-field>
+
+      <mat-form-field >
+        <input
+          matInput
+          name="quantidade"
+          placeholder="quantidade de livros"
+          formControlName="quantidade"
+        />
+      </mat-form-field>
+
+      <mat-form-field >
+        <input
+          matInput
+          name="ISBN"
+          placeholder="ISBN"
+          formControlName="ISBN"
+        />
+      </mat-form-field>
+
+
+
+      <div class="example-button-row">
+        <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary"> Cadastrar</button>
+        <button mat-raised-button routerLink="/" color="warn">&nbsp;Cancelar&nbsp; &nbsp;</button>
+      </div>
+
+  </form>
+</mat-card>
+<br>
+

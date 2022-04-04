@@ -1,0 +1,62 @@
+
+<mat-form-field class="example-full-width espaco" appearance="fill">
+  <mat-label>pesquisar na tabela</mat-label>
+  <input matInput placeholder="Pesquisar Autor" #input1
+  (keyup)="applyFilter($event)" >
+</mat-form-field>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Header and Row Declarations -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  <!-- User name Definition -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef> Nome do Autor</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.nome}} </mat-cell>
+  </ng-container>
+
+  <!-- Age Definition -->
+  <ng-container matColumnDef="isni">
+    <mat-header-cell *matHeaderCellDef> ISNI  </mat-header-cell>
+    <mat-cell  *matCellDef="let row"> {{row.ISNI}} </mat-cell>
+  </ng-container>
+
+  <!-- Title Definition -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>E-mail</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="data">
+    <mat-header-cell *matHeaderCellDef>data de nascimento</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.dataNascimento}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef style="width:180px"> Ações </mat-header-cell>
+    <mat-cell *matCellDef="let row" style="width:180px">
+      <button routerLink="/autores/editar/{{row.ISNI}}" mat-raised-button color="accent" class="me-2">
+        Editar&nbsp;
+      </button>
+      <button routerLink="/autores/deletar/{{row.ISNI}}" mat-raised-button color="warn" class="">
+        Excluir&nbsp;&nbsp;&nbsp;
+      </button>
+
+    </mat-cell>
+  </ng-container>
+
+</mat-table>
+<mat-paginator
+[length]="tamanho"
+[pageSize]="5"
+[pageSizeOptions]="[5]"
+aria-label="Select page">
+</mat-paginator>
+<br>
+
+<div class="w-100 mb-3">
+  <button routerLink="/autores/cadastrar" mat-raised-button color="primary" class="">
+    Cadastrar novo Autor
+  </button>
+</div>

@@ -1,0 +1,58 @@
+<mat-card>
+
+  <form class="container" [formGroup]="novoClienteForm" (submit)="submit(form)" #form="ngForm">
+    <mat-card-title>Cadastro de Clientes</mat-card-title>
+      <mat-form-field appearance="fill">
+
+        <input
+          matInput
+          name="nome"
+          placeholder="Nome completo" required
+          formControlName="nome"
+
+
+        />
+        <app-mensagem *ngIf="novoClienteForm.get('nome')?.errors?.['required'] &&
+        novoClienteForm.get('nome')?.touched" mensagem="nome é obrigatório">
+        </app-mensagem>
+        <app-mensagem *ngIf="novoClienteForm.get('nome')?.errors?.['maxlength'] &&
+        novoClienteForm.get('nome')?.touched" mensagem="máximo de 50 caracteres">
+        </app-mensagem>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          name="email"
+          placeholder="Email"
+          formControlName="email" required
+        />
+        <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['required'] &&
+        novoClienteForm.get('email')?.touched" mensagem="email é obrigatório">
+        </app-mensagem>
+        <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['email'] &&
+        novoClienteForm.get('email')?.touched" mensagem="formato de email inválido">
+        </app-mensagem>
+      </mat-form-field>
+
+      <mat-form-field >
+
+        <input
+          matInput
+          name="contato"
+          placeholder="contato"
+          formControlName="contato"
+        />
+        <app-mensagem *ngIf="novoClienteForm.get('contato')?.errors?.['required'] &&
+        novoClienteForm.get('contato')?.touched" mensagem="contato é obrigatório">
+        </app-mensagem>
+      </mat-form-field>
+
+      <div class="example-button-row">
+        <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary"> Cadastrar</button>
+        <button mat-raised-button routerLink="/" color="warn">&nbsp;Cancelar&nbsp; &nbsp;</button>
+      </div>
+
+  </form>
+</mat-card>

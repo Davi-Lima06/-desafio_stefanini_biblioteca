@@ -1,0 +1,43 @@
+<mat-card>
+  <form class="container" (submit)="submit(form)" #form="ngForm">
+      <mat-form-field >
+        <!-- <label for="exampleInputEmail1">Endereço de email</label> -->
+        <input
+          matInput
+          name="nome"
+          placeholder="Nome completo"
+          [(ngModel)]="cliente.nome"
+          #nome="ngModel"
+          disabled
+        />
+      </mat-form-field>
+
+      <mat-form-field >
+        <!-- <label for="exampleInputPassword1">Senha</label> -->
+        <input
+        disabled
+          matInput
+          name="email"
+          placeholder="Email"
+          [(ngModel)]="cliente.email"
+        />
+      </mat-form-field>
+
+      <mat-form-field >
+        <!-- <label for="exampleInputEmail1">Endereço de email</label> -->
+        <input
+        disabled
+          matInput
+          name="contato"
+          placeholder="contato"
+          [(ngModel)]="cliente.contato"
+        />
+      </mat-form-field>
+
+
+      <div class="example-button-row">
+        <button mat-raised-button type="submit" color="primary"> &nbsp;&nbsp;Deletar&nbsp;&nbsp;</button>
+        <button mat-raised-button routerLink="/" color="warn">Cancelar&nbsp;</button>
+      </div>
+  </form>
+</mat-card>
