@@ -1,0 +1,42 @@
+<mat-card class="card row">
+  <mat-card-title class="text-center">Devolvolução de Livros</mat-card-title>
+  <form class="container" (submit)="submit(form)" #form="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Nome do livro:</mat-label>
+        <input
+          matInput
+          name="nomeLivro"
+          disabled
+          [ngModel]="emprestimos.livro?.nomeLivro"
+        />
+
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome do Cliente:</mat-label>
+        <input
+          matInput
+          disabled
+          name="nomeEditora"
+          [ngModel]="emprestimos.cliente?.nome"
+        />
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Data de empréstimo:</mat-label>
+        <input
+        type="date"
+        matInput
+        disabled
+        name="dataInicio"
+        [ngModel]="emprestimos.dataInicio"
+        />
+      </mat-form-field>
+
+      <div class="example-button-row">
+        <button mat-raised-button type="submit" color="primary">&nbsp;Devolver&nbsp;&nbsp;&nbsp;</button>
+        <button mat-raised-button routerLink="/emprestimos/listar/" color="warn">&nbsp;Voltar</button>
+      </div>
+
+  </form>
+
+</mat-card>

@@ -11,12 +11,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./listar-clientes.component.scss'],
 })
 export class ListarClientesComponent implements OnInit, AfterViewInit {
-
   @ViewChild(MatPaginator)
-  paginator!: MatPaginator
+  paginator!: MatPaginator;
   dataSource = new MatTableDataSource<Cliente>([]);
   tamanho: number = 0;
-  filter: string = '';
   clientes: Cliente[] = [];
   displayedColumns = ['nome', 'email', 'contato', 'acoes'];
 
@@ -24,24 +22,26 @@ export class ListarClientesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.carregarClientesPaginator();
-    this.clienteApi.listarClientes().subscribe(
-      clientes => {
-        this.tamanho = clientes.length
-        this.dataSource.data = clientes
-      }
-    )
-
-  }
-
-  carregarClientesPaginator(){
-    this.clienteApi.listarPaginator(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5).subscribe((res) => {
-      this.clientes = res;
-
+    this.clienteApi.listarClientes().subscribe((clientes) => {
+      this.tamanho = clientes.length;
+      this.dataSource.data = clientes;
     });
   }
-  applyFilter(event: Event) {
 
-    this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  carregarClientesPaginator() {
+    this.clienteApi
+      .listarPaginator(
+        this.paginator?.pageIndex ?? 0,
+        this.paginator?.pageSize ?? 5
+      )
+      .subscribe((res) => {
+        this.clientes = res;
+      });
+  }
+  applyFilter(event: Event) {
+    this.dataSource.filter = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
     console.log(this.dataSource.filter);
 
     if (this.dataSource.paginator) {
@@ -50,9 +50,6 @@ export class ListarClientesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
-    this.dataSource.paginator = this.paginator
-
+    this.dataSource.paginator = this.paginator;
   }
-
 }

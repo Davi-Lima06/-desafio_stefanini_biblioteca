@@ -1,65 +1,63 @@
-<mat-card>
+<mat-card class="card margem">
+  <mat-card-title class="text-center">Deletar Autores</mat-card-title>
   <form class="container" (submit)="submit(form)" #form="ngForm">
       <mat-form-field >
 
+        <mat-label>Nome completo:</mat-label>
         <input
          disabled
           matInput
           name="nome"
-          placeholder="Nome completo"
           [(ngModel)]="autor.nome"
           #nome="ngModel"
         />
       </mat-form-field>
 
       <mat-form-field >
-
+        <mat-label>Email:</mat-label>
         <input
           disabled
           matInput
           name="email"
-          placeholder="Email"
           [(ngModel)]="autor.email"
         />
       </mat-form-field>
 
       <mat-form-field >
-
+        <mat-label>ISNI:</mat-label>
         <input
           disabled
           matInput
           name="ISNI"
-          placeholder="ISNI"
           [(ngModel)]="autor.ISNI"
         />
       </mat-form-field>
 
       <mat-form-field >
-
+        <mat-label>Data de nascimento:</mat-label>
         <input
            disabled
           matInput
           name="dataNascimento"
-          placeholder="data de nascimento"
           [(ngModel)]="autor.dataNascimento"
         />
       </mat-form-field>
 
       <mat-form-field >
-
-        <input
+        <mat-label>Biografia:</mat-label>
+        <textarea
+          rows="3"
           disabled
           matInput
           name="biografia"
-          placeholder="biografia"
           [(ngModel)]="autor.biografia"
-        />
+        ></textarea>
       </mat-form-field>
 
 
       <div class="example-button-row">
         <button mat-raised-button type="submit" color="primary"> &nbsp;&nbsp;&nbsp;Deletar&nbsp;&nbsp;&nbsp;</button>
-        <button mat-raised-button routerLink="/" color="warn">Cancelar&nbsp;</button>
+        <button mat-raised-button routerLink="/autores/listar" color="warn">Cancelar&nbsp;</button>
       </div>
   </form>
 </mat-card>

@@ -1,79 +1,117 @@
 <mat-card class="card">
+  <mat-card-title class="text-center">Cadastro de Autor</mat-card-title>
+  <form
+    class="container"
+    [formGroup]="novoAutorForm"
+    (submit)="submit(form)"
+    #form="ngForm"
+  >
+    <mat-form-field appearance="fill">
+      <mat-label>Nome completo:</mat-label>
+      <input
+        matInput
+        name="nome"
+        placeholder="Nome completo"
+        formControlName="nome"
+      />
+      <app-mensagem *ngIf="novoAutorForm.get('nome')?.errors?.['required'] &&
+      novoAutorForm.get('nome')?.touched" mensagem="Nome é obrigatório">
+      </app-mensagem>
+      <app-mensagem *ngIf="novoAutorForm.get('nome')?.errors?.['maxlength'] &&
+      novoAutorForm.get('nome')?.touched" mensagem="máximo 50 caracteres">
+      </app-mensagem>
+    </mat-form-field>
 
-  <form class="container" [formGroup]="novoAutorForm" (submit)="submit(form)" #form="ngForm">
-    <mat-card-title>Cadastro de Clientes</mat-card-title>
-      <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill">
+      <mat-label>Email:</mat-label>
+      <input
+        matInput
+        name="email"
+        placeholder="ex: email@email.com"
+        formControlName="email"
+      />
+      <app-mensagem *ngIf="novoAutorForm.get('email')?.errors?.['required'] &&
+      novoAutorForm.get('email')?.touched" mensagem="Email é obrigatório">
+      </app-mensagem>
+      <app-mensagem *ngIf="novoAutorForm.get('email')?.errors?.['emailValidator'] &&
+      novoAutorForm.get('email')?.touched" mensagem="Formato inválido">
+      </app-mensagem>
+    </mat-form-field>
 
-        <input
-          matInput
-          name="nome"
-          placeholder="Nome completo" required
-          formControlName="nome"
-        />
-        <!-- <app-mensagem *ngIf="novoClienteForm.get('nome')?.errors?.['required'] &&
-        novoClienteForm.get('nome')?.touched" mensagem="nome é obrigatório">
-        </app-mensagem>
-        <app-mensagem *ngIf="novoClienteForm.get('nome')?.errors?.['maxlength'] &&
-        novoClienteForm.get('nome')?.touched" mensagem="máximo de 50 caracteres">
-        </app-mensagem> -->
+    <mat-form-field>
+      <mat-label>ISNI</mat-label>
+      <input
+        matInput
+        maxlength="16"
+        name="ISNI"
+        placeholder="ISNI do autor"
+        formControlName="ISNI"
+      />
+      <app-mensagem *ngIf="novoAutorForm.get('ISNI')?.errors?.['required'] &&
+      novoAutorForm.get('ISNI')?.touched" mensagem="ISNI é obrigatório">
+      </app-mensagem>
+      <app-mensagem *ngIf="novoAutorForm.get('ISNI')?.errors?.['insiValidator'] &&
+       novoAutorForm.get('ISNI')?.touched"
+      mensagem="não pode conter letras nem simbolos">
+      </app-mensagem>
+      <app-mensagem *ngIf="novoAutorForm.get('ISNI')?.errors?.['minlength'] &&
+       novoAutorForm.get('ISNI')?.touched"
+      mensagem="deve conter no mínimo 10 dígitos">
+      </app-mensagem>
 
-      </mat-form-field>
+    </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <input
-          matInput
-          name="email"
-          placeholder="Email"
-          formControlName="email" required
-        />
-        <!-- <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['required'] &&
-        novoClienteForm.get('email')?.touched" mensagem="email é obrigatório">
-        </app-mensagem>
-        <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['email'] &&
-        novoClienteForm.get('email')?.touched" mensagem="formato de email inválido">
-        </app-mensagem> -->
-        <!-- <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['emailExiste'] &&
-        novoClienteForm.get('email')?.touched" mensagem="email já cadastrado">
-        </app-mensagem> -->
-      </mat-form-field>
-
-      <mat-form-field >
-        <input
-          matInput
-          name="ISNI"
-          placeholder="ISNI"
-          formControlName="ISNI"
-        />
-      </mat-form-field>
-
-      <mat-form-field >
-        <input
+    <mat-form-field>
+      <mat-label>Data de nascimento:</mat-label>
+      <input
+        #inputData
+        (keyup)="validaData(inputData.value)"
         type="date"
-          matInput
-          name="dataNascimento"
-          placeholder="Data de nascimento"
-          formControlName="dataNascimento"
-        />
-      </mat-form-field>
+        matInput
+        name="dataNascimento"
+        placeholder="Data de nascimento"
+        formControlName="dataNascimento"
+      />
+      <app-mensagem *ngIf="novoAutorForm.get('dataNascimento')?.errors?.['required'] &&
+      novoAutorForm.get('dataNascimento')?.touched" mensagem="data de nascimento é obrigatório">
+      </app-mensagem>
+      <app-mensagem *ngIf="validaData(inputData.value)" mensagem="o usuário não pode inserir data com ano atual nem futuro">
+      </app-mensagem>
+    </mat-form-field>
 
-      <mat-form-field >
-        <textarea name="" id="" cols="30" rows="1"
-          type="text"
-          matInput
-          name="biografia"
-          placeholder="biografia"
-          formControlName="biografia"
-          >
-        </textarea>
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>Biografia:</mat-label>
+      <textarea
+        rows="3"
+        type="text"
+        matInput
+        name="biografia"
+        placeholder="biografia do autor"
+        formControlName="biografia"
+      >
+      </textarea>
+      <app-mensagem *ngIf="novoAutorForm.get('biografia')?.errors?.['required'] &&
+      novoAutorForm.get('biografia')?.touched" mensagem="biografia é obrigatório">
+      </app-mensagem>
+      <app-mensagem *ngIf="novoAutorForm.get('biografia')?.errors?.['maxlength'] &&
+      novoAutorForm.get('biografia')?.touched" mensagem="tamanho máximo de 200 caracteres">
+      </app-mensagem>
+    </mat-form-field>
 
-
-      <div class="example-button-row">
-        <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary"> Cadastrar</button>
-        <button mat-raised-button routerLink="/" color="warn">&nbsp;Cancelar&nbsp; &nbsp;</button>
-      </div>
-
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        [disabled]="form.invalid || validaData(inputData.value)"
+        type="submit"
+        color="primary"
+      >
+        Cadastrar
+      </button>
+      <button mat-raised-button routerLink="/autores/listar" color="warn">
+        &nbsp;Cancelar&nbsp; &nbsp;
+      </button>
+    </div>
   </form>
 </mat-card>
-<br>
-<br>
+<br />
+<br />

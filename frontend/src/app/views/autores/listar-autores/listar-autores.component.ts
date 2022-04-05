@@ -44,7 +44,6 @@ export class ListarAutoresComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator
 

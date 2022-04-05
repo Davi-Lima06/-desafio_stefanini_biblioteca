@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 
 import br.com.stefanini.developerup.dao.EmprestimoDao;
@@ -36,6 +37,7 @@ public class EmprestimoService {
 		}).findFirst().get();
     }
     
+    @Transactional
     public void inserir(EmprestimoDto emprestimo) throws Exception {
     	this.validar(emprestimo);
     	Cliente cliente = emprestimo.getCliente();
@@ -49,8 +51,7 @@ public class EmprestimoService {
     			throw new Exception("já existe cadastro com essa configuração");
         	}
     	}
-    	
-    	
+    	   	
     	if(cliente.equals(emprestimo.getCliente())) {
     		cliDao.emprestarLivro(cliente.getEmail());
     	}
@@ -62,6 +63,7 @@ public class EmprestimoService {
     	dao.inserir(EmprestimoParser.get().parserEmprestimo(emprestimo));
     }
     
+    @Transactional
     public void deletar(Long parametro) {   
     	Emprestimo emp = dao.listarUmEmprestimo(parametro);
     	Livro livro = emp.getLivro();

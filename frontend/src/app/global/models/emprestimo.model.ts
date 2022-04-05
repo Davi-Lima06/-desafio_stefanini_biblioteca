@@ -3,7 +3,7 @@ import Livro from './livro.model';
 
 export default interface Emprestimo {
   id: number;
-  cliente: Cliente;
-  livro: Livro;
+  cliente: Cliente | undefined;
+  livro: Livro | undefined;
   dataInicio: string;
 }

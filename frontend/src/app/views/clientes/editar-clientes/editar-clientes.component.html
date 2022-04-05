@@ -1,41 +1,60 @@
 <mat-card>
+  <mat-card-title class="text-center">Editar Cliente</mat-card-title>
   <form class="container" (submit)="submit(form)" #form="ngForm">
       <mat-form-field >
-        <!-- <label for="exampleInputEmail1">Endereço de email</label> -->
+        <mat-label>Nome completo:</mat-label>
         <input
+          #inputName
+          required
           matInput
           name="nome"
-          placeholder="Nome completo"
           [(ngModel)]="cliente.nome"
-          #nome="ngModel"
         />
+        <app-mensagem *ngIf="inputName.value.length == 0" mensagem="Nome é obrigatório">
+        </app-mensagem>
+        <app-mensagem *ngIf="inputName.value.length > 50" mensagem="máximo 50 caracteres">
+        </app-mensagem>
       </mat-form-field>
 
       <mat-form-field >
-        <!-- <label for="exampleInputPassword1">Senha</label> -->
+        <mat-label>Email:</mat-label>
         <input
-        disabled
+          disabled
           matInput
           name="email"
-          placeholder="Email"
           [(ngModel)]="cliente.email"
         />
       </mat-form-field>
 
       <mat-form-field >
-        <!-- <label for="exampleInputEmail1">Endereço de email</label> -->
+        <mat-label>Contato:</mat-label>
         <input
           matInput
+          #input
+          maxlength="16"
+          (keypress)="mascara(input)"
+          placeholder="(99) 999-999-999"
           name="contato"
-          placeholder="contato"
           [(ngModel)]="cliente.contato"
+        />
+        <app-mensagem *ngIf="validar(input)" mensagem="formato de telefone inválido">
+        </app-mensagem>
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Livros emprestados:</mat-label>
+        <input
+          matInput
+          disabled
+          name="quantidade"
+          [ngModel]="cliente.livrosEmprestados"
         />
       </mat-form-field>
 
 
       <div class="example-button-row">
-        <button mat-raised-button type="submit" color="primary"> &nbsp;&nbsp;&nbsp;Editar&nbsp;&nbsp;&nbsp;</button>
-        <button mat-raised-button routerLink="/" color="warn">Cancelar&nbsp;</button>
+        <button mat-raised-button type="submit" [disabled]="validar(input)" color="primary"> &nbsp;&nbsp;&nbsp;Editar&nbsp;&nbsp;&nbsp;</button>
+        <button mat-raised-button routerLink="/clientes/listar" color="warn">Cancelar&nbsp;</button>
       </div>
   </form>
 </mat-card>

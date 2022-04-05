@@ -1,3 +1,6 @@
+import { CadastrarEmprestimosComponent } from './views/emprestimos/cadastrar-emprestimos/cadastrar-emprestimos.component';
+import { DevolverEmprestimosComponent } from './views/emprestimos/devolver-emprestimos/devolver-emprestimos.component';
+import { DetalhesEmprestimosComponent } from './views/emprestimos/detalhes-emprestimos/detalhes-emprestimos.component';
 import { ListarEmprestimosComponent } from './views/emprestimos/listar-emprestimos/listar-emprestimos.component';
 import { DeletarLivrosComponent } from './views/livros/deletar-livros/deletar-livros.component';
 import { EditarLivrosComponent } from './views/livros/editar-livros/editar-livros.component';
@@ -42,7 +45,7 @@ const routes: Routes = [
     data: { pageTitle: 'Deletar Clientes' },
   },
   {
-    path: 'autores',
+    path: 'autores/listar',
     component: ListarAutoresComponent,
     data: { pageTitle: 'listar autores' },
   },
@@ -62,7 +65,7 @@ const routes: Routes = [
     data: { pageTitle: 'deletar autores' },
   },
   {
-    path: 'livros',
+    path: 'livros/listar',
     component: ListarLivrosComponent,
     data: { pageTitle: 'listar livros' },
   },
@@ -85,6 +88,21 @@ const routes: Routes = [
     path: 'emprestimos/listar',
     component: ListarEmprestimosComponent,
     data: { pageTitle: 'listar livros' },
+  },
+  {
+    path: 'emprestimos/cadastrar',
+    component: CadastrarEmprestimosComponent,
+    data: { pageTitle: 'cadastrar emprestimo' },
+  },
+  {
+    path: 'emprestimos/detalhes/:parametro',
+    component: DetalhesEmprestimosComponent,
+    data: { pageTitle: 'detalhes emprestimo' },
+  },
+  {
+    path: 'emprestimos/devolver/:parametro',
+    component: DevolverEmprestimosComponent,
+    data: { pageTitle: 'devolver livros' },
   },
 ];
 

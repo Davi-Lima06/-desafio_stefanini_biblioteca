@@ -1,3 +1,4 @@
+import { ValidarDataService } from './../../../core/services/validar-data.service';
 import  Autor  from 'src/app/global/models/autor.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LivrosService } from './../livros.service';
@@ -13,7 +14,7 @@ import { AutoresService } from '../../autores/autores.service';
 export class EditarLivrosComponent implements OnInit {
 
   autores: Autor[] = []
-
+  validaAutor:boolean = false
   livro: Livro = {
     nomeLivro: '',
     anoPublicacao: '',
@@ -23,11 +24,14 @@ export class EditarLivrosComponent implements OnInit {
     autor: undefined
   }
 
+  nomeAutor: string | undefined = ''
+
   constructor(
     private service: LivrosService,
     private autorService: AutoresService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dataService: ValidarDataService
   ) { }
 
   ngOnInit(): void {
@@ -38,18 +42,33 @@ export class EditarLivrosComponent implements OnInit {
     )
     const id = this.activatedRoute.snapshot.paramMap.get('parametro')
     this.service.listarUmLivro(id).subscribe(
-      autor => {
-        this.livro = autor
+      livros => {
+        this.livro = livros
+        this.nomeAutor = livros.autor?.nome
       }
     )
+  }
+
+  parseInt(valor: any){
+    var convertido = parseInt(valor)
+    return convertido
+  }
+
+  validaData(data:any):boolean{
+    return this.dataService.validaData(data)
+  }
+
+  valor(valor: any){
+    this.nomeAutor = valor
+    this.validaAutor = true
   }
 
   submit(form:any){
 
     this.service.editar(this.livro).subscribe(
       sucesso => {
-        this.service.showMessage('Autor editado com sucesso')
-        this.router.navigate(['/livros'])
+        this.service.showMessage('Livro editado com sucesso')
+        this.router.navigate(['/livros/listar'])
       },
       err => {
         console.log(err)

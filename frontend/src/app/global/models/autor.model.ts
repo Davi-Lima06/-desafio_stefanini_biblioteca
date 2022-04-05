@@ -1,6 +1,6 @@
 export default interface Autor {
   nome: string;
-  ISNI: number;
+  ISNI: number | string;
   email: string;
   dataNascimento: string;
   biografia: string;

@@ -13,7 +13,9 @@ export class DeletarClientesComponent implements OnInit {
   cliente: Cliente = {
     nome: '',
     email: '',
-    contato: ''
+    contato: '',
+    livrosEmprestados:0
+
   }
 
   constructor(
@@ -37,7 +39,8 @@ export class DeletarClientesComponent implements OnInit {
     }else{
       this.service.deletar(this.cliente.email).subscribe(
         sucesso => {
-          this.router.navigate(['/'])
+          this.service.showMessage('Cliente deletado com sucesso')
+          this.router.navigate(['/clientes/listar'])
         }
       )
     }

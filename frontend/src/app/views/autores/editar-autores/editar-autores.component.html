@@ -1,62 +1,72 @@
-<mat-card>
+<mat-card class="card margem">
+  <mat-card-title class="text-center">Editar Autor</mat-card-title>
   <form class="container" (submit)="submit(form)" #form="ngForm">
       <mat-form-field >
-
+        <mat-label>Nome do autor:</mat-label>
         <input
+          #inputName
+          required
           matInput
           name="nome"
-          placeholder="Nome completo"
           [(ngModel)]="autor.nome"
-          #nome="ngModel"
         />
+        <app-mensagem *ngIf="inputName.value.length == 0" mensagem="Nome é obrigatório">
+        </app-mensagem>
+        <app-mensagem *ngIf="inputName.value.length > 50" mensagem="máximo 50 caracteres">
+        </app-mensagem>
       </mat-form-field>
-
       <mat-form-field >
-
+        <mat-label>Email:</mat-label>
         <input
           disabled
           matInput
           name="email"
-          placeholder="Email"
           [(ngModel)]="autor.email"
         />
       </mat-form-field>
-
       <mat-form-field >
-
+        <mat-label>ISNI:</mat-label>
         <input
           disabled
           matInput
           name="ISNI"
-          placeholder="ISNI"
           [(ngModel)]="autor.ISNI"
         />
       </mat-form-field>
-
       <mat-form-field >
-
+        <mat-label>Data de nascimento:</mat-label>
         <input
+          #inputData
           matInput
+          type="date"
+          (keyup)="validaData(inputData.value)"
           name="dataNascimento"
-          placeholder="data de nascimento"
           [(ngModel)]="autor.dataNascimento"
         />
+        <app-mensagem *ngIf="inputData.value.length == 0" mensagem="Data de nascimento é obrigatório">
+        </app-mensagem>
+        <app-mensagem *ngIf="validaData(inputData.value)" mensagem="o usuário não pode inserir data com ano atual nem futuro">
+        </app-mensagem>
       </mat-form-field>
-
       <mat-form-field >
-
-        <input
+        <mat-label>Biografia:</mat-label>
+        <textarea
+          rows="3"
+          #inputBiografia
           matInput
           name="biografia"
-          placeholder="biografia"
           [(ngModel)]="autor.biografia"
-        />
+        ></textarea>
+        <app-mensagem *ngIf="inputBiografia.value.length == 0" mensagem="Biografia é obrigatório">
+        </app-mensagem>
+        <app-mensagem *ngIf="inputBiografia.value.length > 200" mensagem="máximo 200 caracteres">
+        </app-mensagem>
       </mat-form-field>
 
 
       <div class="example-button-row">
-        <button mat-raised-button type="submit" color="primary"> &nbsp;&nbsp;&nbsp;Editar&nbsp;&nbsp;&nbsp;</button>
-        <button mat-raised-button routerLink="/" color="warn">Cancelar&nbsp;</button>
+        <button mat-raised-button [disabled]="form.invalid || validaData(inputData.value)" type="submit" color="primary"> &nbsp;&nbsp;&nbsp;Editar&nbsp;&nbsp;&nbsp;</button>
+        <button mat-raised-button routerLink="/autores/listar" color="warn">Cancelar&nbsp;</button>
       </div>
   </form>
 </mat-card>

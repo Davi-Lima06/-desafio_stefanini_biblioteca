@@ -4,7 +4,7 @@ export default interface Livro {
   nomeLivro: string;
   anoPublicacao: string;
   nomeEditora: string;
-  ISBN: number;
-  quantidade: number;
+  ISBN: number | string;
+  quantidade: number | string;
   autor: Autor | undefined;
 }

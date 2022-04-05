@@ -1,3 +1,4 @@
+import { ValidarDataService } from './../../../core/services/validar-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AutoresService } from './../autores.service';
 import  Autor  from 'src/app/global/models/autor.model';
@@ -22,7 +23,8 @@ export class EditarAutoresComponent implements OnInit {
   constructor(
     private service: AutoresService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dataService: ValidarDataService
   ) { }
 
   ngOnInit(): void {
@@ -34,12 +36,16 @@ export class EditarAutoresComponent implements OnInit {
     )
   }
 
+  validaData(data: any):boolean{
+    return this.dataService.validaData(data)
+  }
+
   submit(form:any){
 
     this.service.editar(this.autor).subscribe(
       sucesso => {
         this.service.showMessage('Autor editado com sucesso')
-        this.router.navigate(['/autores'])
+        this.router.navigate(['/autores/listar'])
       },
       err => {
         console.log(err)

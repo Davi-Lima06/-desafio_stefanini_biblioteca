@@ -49,9 +49,10 @@ export class DeletarLivrosComponent implements OnInit {
     this.service.deletar(this.livro.ISBN).subscribe(
       sucesso => {
         this.service.showMessage('Livro deletado com sucesso')
-        this.router.navigate(['/livros'])
+        this.router.navigate(['/livros/listar'])
       },
       err => {
+        this.service.showMessage('Alguns clientes não devolveram esse livro.')
         console.log(err)
       }
     )

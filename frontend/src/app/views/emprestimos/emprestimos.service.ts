@@ -35,7 +35,6 @@ export class EmprestimosService {
   }
 
   cadastrarEmprestimo(emprestimo: Emprestimo):Observable<Emprestimo>{
-    console.log(emprestimo)
     return this.http.post<Emprestimo>(ApiUrl.urlBaseEmprestimos,emprestimo)
   }
 

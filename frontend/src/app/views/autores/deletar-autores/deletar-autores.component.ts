@@ -39,12 +39,12 @@ export class DeletarAutoresComponent implements OnInit {
     this.service.deletar(this.autor.ISNI).subscribe(
       sucesso => {
         this.service.showMessage('Autor deletado com sucesso')
-        this.router.navigate(['/autores'])
+        this.router.navigate(['/autores/listar'])
       },
       err => {
-        console.log(err)
+        this.service.showMessage('o autor ainda tem livros cadastrados ')
+
       }
     )
-
 }
 }

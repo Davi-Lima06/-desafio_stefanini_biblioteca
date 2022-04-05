@@ -64,4 +64,5 @@ export class MessagemService {
       this.snackbar.open(message, 'x', config);
     });
   }
+
 }

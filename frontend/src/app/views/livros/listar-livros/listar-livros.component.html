@@ -1,28 +1,24 @@
 
 <mat-form-field class="example-full-width espaco" appearance="fill">
   <mat-label>pesquisar na tabela</mat-label>
-  <input matInput placeholder="Pesquisar Autor"
+  <input matInput placeholder="Pesquisar Autor" #input
   (keyup)="applyFilter($event)" >
 </mat-form-field>
 
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!-- Header and Row Declarations -->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
-  <!-- User name Definition -->
   <ng-container matColumnDef="nome">
     <mat-header-cell *matHeaderCellDef> Nome do Livro</mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.nomeLivro}} </mat-cell>
   </ng-container>
 
-  <!-- Age Definition -->
   <ng-container matColumnDef="autor">
     <mat-header-cell *matHeaderCellDef> Autor  </mat-header-cell>
     <mat-cell  *matCellDef="let row"> {{row.autor.nome}} </mat-cell>
   </ng-container>
 
-  <!-- Title Definition -->
   <ng-container matColumnDef="ISBN">
     <mat-header-cell *matHeaderCellDef>ISBN</mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.ISBN}} </mat-cell>
@@ -34,7 +30,7 @@
   </ng-container>
 
   <ng-container matColumnDef="quantidade">
-    <mat-header-cell *matHeaderCellDef>data de publicação</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Qt. disponível</mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.quantidade}} </mat-cell>
   </ng-container>
 
@@ -51,11 +47,14 @@
     </mat-cell>
   </ng-container>
 
+  <tr class="mat-row " *matNoDataRow>
+    <td class="mat-cell" colspan="4">Nenhum item cadastrado</td>
+  </tr>
 </mat-table>
 <mat-paginator
 [length]="tamanho"
 [pageSize]="5"
-[pageSizeOptions]="[5]"
+[pageSizeOptions]="[3,5,10]"
 aria-label="Select page">
 </mat-paginator>
 <br>

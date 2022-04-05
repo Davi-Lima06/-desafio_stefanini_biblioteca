@@ -1,0 +1,55 @@
+<mat-card class="card">
+ <mat-card-title class="text-center">Emprestimo de Livros</mat-card-title>
+  <form class="container" [formGroup]="novoEmprestimoForm" (submit)="submit(form)" #form="ngForm">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Data:</mat-label>
+        <input
+          required
+          matInput
+          #inputData
+          (keyup)="validaData(inputData.value)"
+          type="date"
+          name="dataInicio"
+          formControlName="dataInicio"
+        />
+        <app-mensagem *ngIf="validaData(inputData.value)" mensagem="não pode haver datas passadas">
+        </app-mensagem>
+        <app-mensagem *ngIf="novoEmprestimoForm.get('dataInicio')?.errors?.['required'] &&
+        novoEmprestimoForm.get('dataInicio')?.touched" mensagem="data de inicio é obrigatório">
+      </app-mensagem>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Selecione o livro:</mat-label>
+        <mat-select disableRipple formControlName="livro">
+          <mat-option *ngFor="let livro of livros" (onSelectionChange)="valor(livro.quantidade)" [value]="livro">{{livro.nomeLivro}}</mat-option>
+        </mat-select>
+        <app-mensagem *ngIf="novoEmprestimoForm.get('livro')?.errors?.['required'] &&
+              novoEmprestimoForm.get('livro')?.touched && livros.length > 0" mensagem="por favor selecione um livro">
+              </app-mensagem>
+              <app-mensagem *ngIf="livros.length == 0" mensagem=" nenhum livro cadastrado">
+              </app-mensagem>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>selecione o cliente:</mat-label>
+        <mat-select disableRipple formControlName="cliente">
+          <mat-option *ngFor="let cliente of clientes" (onSelectionChange)="livrosClientes(cliente.livrosEmprestados)" [value]="cliente">{{cliente.nome}}</mat-option>
+        </mat-select>
+        <app-mensagem *ngIf="novoEmprestimoForm.get('cliente')?.errors?.['required'] &&
+              novoEmprestimoForm.get('cliente')?.touched && livros.length > 0" mensagem="por favor selecione um vliente">
+              </app-mensagem>
+              <app-mensagem *ngIf="clientes.length == 0" mensagem=" nenhum cliente cadastrado">
+              </app-mensagem>
+      </mat-form-field>
+
+      <div class="example-button-row">
+        <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary"> Cadastrar</button>
+        <button mat-raised-button routerLink="/emprestimos/listar" color="warn">&nbsp;Cancelar&nbsp; &nbsp;</button>
+      </div>
+
+  </form>
+</mat-card>
+<br>
+

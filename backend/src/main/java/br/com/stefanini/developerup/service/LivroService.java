@@ -5,10 +5,12 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 
 import br.com.stefanini.developerup.dao.LivroDao;
 import br.com.stefanini.developerup.dto.LivroDto;
+import br.com.stefanini.developerup.model.Livro;
 import br.com.stefanini.developerup.parser.LivroParser;
 
 @RequestScoped
@@ -29,23 +31,34 @@ public class LivroService {
 		}).findFirst().get();
     }
     
+    @Transactional
     public void inserir(LivroDto livro) {
     	this.validar(livro);
     	dao.inserir(LivroParser.get().parseLivro(livro));
     }
     
+    @Transactional
     public void deletar(Long parametro) {   
     	dao.deletar(parametro);
     }
     
+    @Transactional
     public void atualizar(LivroDto livro,Long parametro) {
     	dao.atualizar(LivroParser.get().parseLivro(livro), parametro);
     }
     
+    @Transactional
     public void emprestarLivro(Long parametro) throws Exception {
-    	dao.emprestarLivro( parametro);
+    	Livro livro = dao.listaUmLivro(parametro);
+		Long qtLivros = 0L; 
+		if(livro.getQuantidade().equals(qtLivros)) {
+			throw new Exception("esse livro não está disponível no momento");
+		}else {
+    	dao.emprestarLivro( parametro, livro);
+		}
     }
     
+    @Transactional
     public void devolverLivro(Long parametro) {
     	dao.devolverLivro( parametro); 
     }

@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 
 import br.com.stefanini.developerup.dao.AutorDao;
@@ -31,15 +32,18 @@ public class AutorService {
 		}).findFirst().get();
 	}
 	
+	@Transactional
 	public void inserir(AutorDto autor) {// insere um novo autor
 		this.validar(autor);
 		dao.inserir(AutorParser.get().parserAutor(autor));
 	}
 	
+	@Transactional
 	public void deletar(Long id) {// deleta um autor
 		dao.deletar(id);
 	}
 	
+	@Transactional
 	public void atualizar(AutorDto autor, Long id) {// atualiza um autor
 		dao.atualizar(AutorParser.get().parserAutor(autor), id);
 	}

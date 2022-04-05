@@ -1,0 +1,119 @@
+
+    <mat-card class="card row">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <form class="container ">
+              <mat-card-title>Detalhes do livro</mat-card-title>
+                <mat-form-field appearance="fill">
+                  <mat-label>Nome do autor:</mat-label>
+                  <input
+                    matInput
+                    name="nomeLivro"
+                    disabled
+                    [ngModel]="emprestimos.livro?.nomeLivro"
+                  />
+
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Nome da Editora:</mat-label>
+                  <input
+                    matInput
+                    disabled
+                    name="nomeEditora"
+                    [ngModel]="emprestimos.livro?.nomeEditora"
+                  />
+                </mat-form-field>
+
+                <mat-form-field >
+                  <mat-label>Ano de publicação:</mat-label>
+                  <input
+                  type="date"
+                  matInput
+                  disabled
+                  name="anoPublicacao"
+                  [ngModel]="emprestimos.livro?.anoPublicacao"
+                  />
+                </mat-form-field>
+
+                <mat-form-field >
+                  <mat-label>Quantidade de livros disponíveis:</mat-label>
+                  <input
+                    matInput
+                    disabled
+                    name="quantidade"
+                    [ngModel]="emprestimos.livro?.quantidade"
+                  />
+                </mat-form-field>
+
+                <mat-form-field >
+                  <mat-label>ISBN:</mat-label>
+                  <input
+                    matInput
+                    disabled
+                    name="ISBN"
+                    [ngModel]="emprestimos.livro?.ISBN"
+                  />
+                </mat-form-field>
+
+                <div class="example-button-row">
+                  <button mat-raised-button routerLink="/emprestimos/listar" color="primary">&nbsp;Voltar&nbsp;&nbsp;&nbsp;</button>
+                  <button mat-raised-button routerLink="/emprestimos/devolver/{{emprestimos.id}}" color="warn">&nbsp;Devolver</button>
+                </div>
+
+            </form>
+          </div>
+      <div class="col">
+        <form class="container">
+          <mat-card-title>Detalhes do cliente:</mat-card-title>
+            <mat-form-field appearance="fill">
+              <mat-label>nome do cliente</mat-label>
+              <input
+                matInput
+                disabled
+                name="cliente"
+                [ngModel]="emprestimos.cliente?.nome"
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Nome da editora:</mat-label>
+              <input
+                matInput
+                disabled
+                name="email"
+                [ngModel]="emprestimos.cliente?.email"
+              />
+            </mat-form-field>
+
+            <mat-form-field >
+              <mat-label>Data de publicaçao:</mat-label>
+              <input
+              type="date"
+              matInput
+              disabled
+              name="contato"
+              [ngModel]="emprestimos.cliente?.contato"
+              />
+            </mat-form-field>
+
+            <mat-form-field >
+              <mat-label>Quantidade de livros emprestados:</mat-label>
+              <input
+                matInput
+                disabled
+                name="livrosEmprestados"
+                [ngModel]="emprestimos.cliente?.livrosEmprestados"
+              />
+            </mat-form-field>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+    </mat-card>
+    <br>
+
+
+

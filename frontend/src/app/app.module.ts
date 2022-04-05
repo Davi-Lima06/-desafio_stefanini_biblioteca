@@ -40,6 +40,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { EditarLivrosComponent } from './views/livros/editar-livros/editar-livros.component';
 import { DeletarLivrosComponent } from './views/livros/deletar-livros/deletar-livros.component';
 import { ListarEmprestimosComponent } from './views/emprestimos/listar-emprestimos/listar-emprestimos.component';
+import { DetalhesEmprestimosComponent } from './views/emprestimos/detalhes-emprestimos/detalhes-emprestimos.component';
+import { DevolverEmprestimosComponent } from './views/emprestimos/devolver-emprestimos/devolver-emprestimos.component';
+import { CadastrarEmprestimosComponent } from './views/emprestimos/cadastrar-emprestimos/cadastrar-emprestimos.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { ListarEmprestimosComponent } from './views/emprestimos/listar-emprestim
     ListarLivrosComponent,
     EditarLivrosComponent,
     DeletarLivrosComponent,
-    ListarEmprestimosComponent
+    ListarEmprestimosComponent,
+    DetalhesEmprestimosComponent,
+    DevolverEmprestimosComponent,
+    CadastrarEmprestimosComponent
 
 
   ],

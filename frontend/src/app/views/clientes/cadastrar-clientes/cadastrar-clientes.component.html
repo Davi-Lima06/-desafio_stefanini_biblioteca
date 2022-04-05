@@ -1,16 +1,12 @@
 <mat-card>
-
+  <mat-card-title class="text-center">Cadastro de Clientes</mat-card-title>
   <form class="container" [formGroup]="novoClienteForm" (submit)="submit(form)" #form="ngForm">
-    <mat-card-title>Cadastro de Clientes</mat-card-title>
       <mat-form-field appearance="fill">
-
+        <mat-label>Nome completo:</mat-label>
         <input
           matInput
           name="nome"
-          placeholder="Nome completo" required
           formControlName="nome"
-
-
         />
         <app-mensagem *ngIf="novoClienteForm.get('nome')?.errors?.['required'] &&
         novoClienteForm.get('nome')?.touched" mensagem="nome é obrigatório">
@@ -22,37 +18,45 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
+        <mat-label>Email:</mat-label>
         <input
           matInput
           name="email"
-          placeholder="Email"
+          placeholder="ex: email@email.com"
           formControlName="email" required
         />
         <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['required'] &&
         novoClienteForm.get('email')?.touched" mensagem="email é obrigatório">
         </app-mensagem>
-        <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['email'] &&
+        <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['emailValidator'] &&
         novoClienteForm.get('email')?.touched" mensagem="formato de email inválido">
         </app-mensagem>
       </mat-form-field>
 
       <mat-form-field >
-
+        <mat-label>Contato:</mat-label>
         <input
+          #input
+          maxlength="16"
+          (keypress)="mascara(input)"
           matInput
           name="contato"
-          placeholder="contato"
+          placeholder="(99) 999-999-999"
           formControlName="contato"
         />
         <app-mensagem *ngIf="novoClienteForm.get('contato')?.errors?.['required'] &&
         novoClienteForm.get('contato')?.touched" mensagem="contato é obrigatório">
         </app-mensagem>
+        <app-mensagem *ngIf="novoClienteForm.get('contato')?.errors?.['validarTelefone'] &&
+        novoClienteForm.get('contato')?.touched" mensagem="formato de telefone inválido">
+        </app-mensagem>
       </mat-form-field>
 
       <div class="example-button-row">
         <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary"> Cadastrar</button>
-        <button mat-raised-button routerLink="/" color="warn">&nbsp;Cancelar&nbsp; &nbsp;</button>
+        <button mat-raised-button routerLink="/clientes/listar" color="warn">&nbsp;Cancelar&nbsp; &nbsp;</button>
       </div>
 
   </form>
 </mat-card>
+

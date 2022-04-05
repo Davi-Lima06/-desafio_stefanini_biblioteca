@@ -1,10 +1,11 @@
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Livro from 'src/app/global/models/livro.model';
 import ApiUrl from 'src/app/global/constant/api-urls.constant';
+
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,9 @@ export class LivrosService {
 
   deletar(parametro: any):Observable<Livro>{
     return this.http.delete<Livro>(`${ApiUrl.urlBaseLivros}/${parametro}`)
+  }
+
+  validarISBN(isbn:number):Observable<any>{
+    return this.http.get<any>(`${ApiUrl.APIurl}/${isbn}.json`)
   }
 }

@@ -52,4 +52,5 @@ export class AutoresService {
   deletar(parametro: any):Observable<Autor>{
     return this.http.delete<Autor>(`${ApiUrl.urlBaseAutor}/${parametro}`)
   }
+
 }

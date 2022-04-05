@@ -1,24 +1,20 @@
 
 <mat-form-field class="example-full-width espaco" appearance="fill">
-  <mat-label>pesquisar na tabela</mat-label>
-  <input matInput placeholder="Pesquisar Autor"
-  (keyup)="applyFilter($event)" >
+  <mat-label>pesquisa não implementada</mat-label>
+  <input matInput disabled >
 </mat-form-field>
 
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!-- Header and Row Declarations -->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
-  <!-- User name Definition -->
   <ng-container matColumnDef="cliente">
     <mat-header-cell *matHeaderCellDef> Nome do Cliente</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.cliente.nome}} </mat-cell>
+    <mat-cell *matCellDef="let row"  > {{row.cliente.nome}} </mat-cell>
   </ng-container>
 
-  <!-- Age Definition -->
   <ng-container matColumnDef="livro">
-    <mat-header-cell *matHeaderCellDef> Autor  </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Nome do Livro  </mat-header-cell>
     <mat-cell  *matCellDef="let row"> {{row.livro.nomeLivro}} </mat-cell>
   </ng-container>
 
@@ -30,27 +26,30 @@
   <ng-container matColumnDef="acoes">
     <mat-header-cell *matHeaderCellDef style="width:180px"> Ações </mat-header-cell>
     <mat-cell *matCellDef="let row" style="width:180px">
-      <button routerLink="/livros/editar/{{row.ISBN}}" mat-raised-button color="accent" class="me-2">
-        Editar&nbsp;
+      <button routerLink="/emprestimos/detalhes/{{row.id}}" mat-raised-button color="accent" class="me-2">
+        Detalhes&nbsp;&nbsp;
       </button>
-      <button routerLink="/livros/deletar/{{row.ISBN}}" mat-raised-button color="warn" class="">
-        Excluir&nbsp;&nbsp;
+      <button routerLink="/emprestimos/devolver/{{row.id}}" mat-raised-button color="warn" class="">
+        Devolver&nbsp;&nbsp;
       </button>
 
     </mat-cell>
   </ng-container>
 
+  <tr class="mat-row " *matNoDataRow>
+    <td class="mat-cell" colspan="4">Nenhum item cadastrado</td>
+  </tr>
 </mat-table>
 <mat-paginator
 [length]="tamanho"
 [pageSize]="5"
-[pageSizeOptions]="[5]"
+[pageSizeOptions]="[3,5,10]"
 aria-label="Select page">
 </mat-paginator>
 <br>
 
 <div class="w-100 mb-3">
-  <button routerLink="/livros/cadastrar" mat-raised-button color="primary" class="">
-    Cadastrar novo Livro
+  <button routerLink="/emprestimos/cadastrar" mat-raised-button color="primary" class="">
+    Cadastrar novo Empréstimo
   </button>
 </div>

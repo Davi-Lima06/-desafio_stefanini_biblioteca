@@ -1,107 +1,125 @@
 <mat-card class="card">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <mat-card-title class="text-center">Cadastro de Livros</mat-card-title>
+        <form class="container" [formGroup]="novoClienteForm" (submit)="submit(form)" #form="ngForm">
+            <mat-form-field appearance="fill">
+              <mat-label>Nome do livro:</mat-label>
+              <input
+                matInput
+                name="nomeLivro"
+                placeholder="Nome do livro" required
+                formControlName="nomeLivro"
+              />
+              <app-mensagem *ngIf="novoClienteForm.get('nomeLivro')?.errors?.['required'] &&
+              novoClienteForm.get('nomeLivro')?.touched" mensagem="Nome do livro é obrigatório">
+              </app-mensagem>
+              <app-mensagem *ngIf="novoClienteForm.get('nomeLivro')?.errors?.['maxlength'] &&
+              novoClienteForm.get('nomeLivro')?.touched" mensagem="máximo 50 caracteres">
+              </app-mensagem>
+            </mat-form-field>
 
-  <form class="container" [formGroup]="novoClienteForm" (submit)="submit(form)" #form="ngForm">
-    <mat-card-title>Cadastro de Livros</mat-card-title>
-      <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill">
+              <mat-label>Nome da Editora</mat-label>
+              <input
+                matInput
+                name="nomeEditora"
+                placeholder="nome da editora"
+                formControlName="nomeEditora" required
+              />
+              <app-mensagem *ngIf="novoClienteForm.get('nomeEditora')?.errors?.['required'] &&
+              novoClienteForm.get('nomeEditora')?.touched" mensagem="Nome da editora é obrigatório">
+              </app-mensagem>
+              <app-mensagem *ngIf="novoClienteForm.get('nomeEditora')?.errors?.['maxlength'] &&
+              novoClienteForm.get('nomeEditora')?.touched" mensagem="máximo 50 caracteres">
+              </app-mensagem>
+            </mat-form-field>
 
-        <input
-          matInput
-          name="nomeLivro"
-          placeholder="Nome completo" required
-          formControlName="nomeLivro"
-        />
-        <!-- <app-mensagem *ngIf="novoClienteForm.get('nome')?.errors?.['required'] &&
-        novoClienteForm.get('nome')?.touched" mensagem="nome é obrigatório">
-        </app-mensagem>
-        <app-mensagem *ngIf="novoClienteForm.get('nome')?.errors?.['maxlength'] &&
-        novoClienteForm.get('nome')?.touched" mensagem="máximo de 50 caracteres">
-        </app-mensagem> -->
+            <mat-form-field appearance="fill">
+              <mat-label>Autor:</mat-label>
+              <mat-select disableRipple formControlName="autor" >
+                <mat-option *ngFor="let autor of autor" [value]="autor">{{autor.nome}}</mat-option>
+              </mat-select>
+              <app-mensagem *ngIf="novoClienteForm.get('autor')?.errors?.['required'] &&
+              novoClienteForm.get('autor')?.touched && autor.length > 0" mensagem="por favor selecione um autor">
+              </app-mensagem>
+              <app-mensagem *ngIf="autor.length == 0" mensagem=" nenhum autor cadastrado">
+              </app-mensagem>
+            </mat-form-field>
 
-      </mat-form-field>
+            <mat-form-field >
+              <mat-label>Ano de publicação:</mat-label>
+              <input
+              #inputData
+              (keyup)="validaData(inputData.value)"
+              type="date"
+              matInput
+              name="anoPublicacao"
+              placeholder="ano de publicação"
+              formControlName="anoPublicacao"
+              />
+              <app-mensagem *ngIf="novoClienteForm.get('anoPublicacao')?.errors?.['required'] &&
+              novoClienteForm.get('anoPublicacao')?.touched && autor.length > 0" mensagem="Data de publicação é obrigatória">
+              </app-mensagem>
+              <app-mensagem *ngIf="validaData(inputData.value)" mensagem="o usuário não pode inserir data com ano atual nem futuro">
+              </app-mensagem>
+            </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <input
-          matInput
-          name="nomeEditora"
-          placeholder="nome da editora"
-          formControlName="nomeEditora" required
-        />
-        <!-- <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['required'] &&
-        novoClienteForm.get('email')?.touched" mensagem="email é obrigatório">
-        </app-mensagem>
-        <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['email'] &&
-        novoClienteForm.get('email')?.touched" mensagem="formato de email inválido">
-        </app-mensagem> -->
-        <!-- <app-mensagem *ngIf="novoClienteForm.get('email')?.errors?.['emailExiste'] &&
-        novoClienteForm.get('email')?.touched" mensagem="email já cadastrado">
-        </app-mensagem> -->
-      </mat-form-field>
+            <mat-form-field >
+              <mat-label>Quantidade de livros:</mat-label>
+              <input
+                #inputQt
+                type="number"
+                matInput
+                name="quantidade"
+                placeholder="quantidade de livros"
+                formControlName="quantidade"
+              />
+              <app-mensagem *ngIf="novoClienteForm.get('quantidade')?.errors?.['required'] &&
+              novoClienteForm.get('quantidade')?.touched" mensagem="quantidade de livros obrigatória">
+              </app-mensagem>
+              <app-mensagem *ngIf="parseInt(inputQt.value) < 0" mensagem="o usuário não pode inserir números negativos">
+              </app-mensagem>
+            </mat-form-field>
 
-      <!-- <mat-form-field >
-        <input
-          matInput
-          name="autor"
-          placeholder="autor"
-          formControlName="autor"
-        />
-      </mat-form-field> -->
+            <div class="example-button-row">
+              <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary"> Cadastrar</button>
+              <button mat-raised-button routerLink="/livros/listar" color="warn">&nbsp;Cancelar&nbsp; &nbsp;</button>
+            </div>
 
-      <!-- <mat-form-field appearance="fill">
-        <mat-label>Toppings</mat-label>
-        <mat-select formControlName="autor" multiple>
-          <mat-select-trigger>
-            {{toppings.value ? toppings.value[0] : ''}}
-            <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
-              (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
-            </span>
-          </mat-select-trigger>
-          <mat-option *ngFor="let topping of autor" [value]="topping">{{topping.nome}}</mat-option>
-        </mat-select>
-      </mat-form-field> -->
-
-      <mat-form-field appearance="fill">
-        <mat-label>Select an option</mat-label>
-        <mat-select disableRipple formControlName="autor">
-          <mat-option *ngFor="let topping of autor" [value]="topping">{{topping.nome}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field >
-        <input
-        type="date"
-        matInput
-        name="anoPublicacao"
-        placeholder="ano de publicação"
-        formControlName="anoPublicacao"
-        />
-      </mat-form-field>
-
-      <mat-form-field >
-        <input
-          matInput
-          name="quantidade"
-          placeholder="quantidade de livros"
-          formControlName="quantidade"
-        />
-      </mat-form-field>
-
-      <mat-form-field >
-        <input
-          matInput
-          name="ISBN"
-          placeholder="ISBN"
-          formControlName="ISBN"
-        />
-      </mat-form-field>
-
-
-
-      <div class="example-button-row">
-        <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary"> Cadastrar</button>
-        <button mat-raised-button routerLink="/" color="warn">&nbsp;Cancelar&nbsp; &nbsp;</button>
+        </form>
       </div>
+      <div class="col">
+        <mat-card-title class="text-center">Validar ISBN</mat-card-title>
+        <form class="container" [formGroup]="novoClienteForm" (submit)="submit(form)" #form="ngForm">
+          <mat-form-field >
+            <mat-label>Código ISBN:</mat-label>
+            <input
+              #isbn
+              matInput
+              type="number"
+              name="ISBN"
+              maxlength="13"
+              formControlName="ISBN"
+              (keyup)="valor(isbn.value)"
+            />
+            <app-mensagem *ngIf="novoClienteForm.get('ISBN')?.errors?.['required'] &&
+              novoClienteForm.get('ISBN')?.touched" mensagem="o código ISBN é obrigatório">
+              </app-mensagem>
+            <app-mensagem *ngIf="isbn.value.length >= 1 && isbn.value.length < 10" mensagem="o código ISBN deve conter no minimo 10 números">
+              </app-mensagem>
+            <app-mensagem *ngIf="isbn.value.length > 13" mensagem="o código ISBN deve conter no máximo 13 números">
+              </app-mensagem>
+            <app-mensagem *ngIf="valido" mensagem="ISBN válido"></app-mensagem>
+            <app-mensagem *ngIf="isbn.value.length >= 10 && isbn.value.length <= 13 && invalido " mensagem="ISBN inválido"></app-mensagem>
+          </mat-form-field>
 
-  </form>
+        </form>
+
+      </div>
+    </div>
+  </div>
 </mat-card>
 <br>
 
