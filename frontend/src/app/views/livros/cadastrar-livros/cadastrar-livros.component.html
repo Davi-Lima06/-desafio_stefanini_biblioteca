@@ -115,6 +115,21 @@
             <app-mensagem *ngIf="isbn.value.length >= 10 && isbn.value.length <= 13 && invalido " mensagem="ISBN inválido"></app-mensagem>
           </mat-form-field>
 
+          <mat-form-field *ngIf="valido">
+            <mat-label>Numero de páginas</mat-label>
+            <input
+            disabled
+            matInput
+            [value]="qtLivros">
+          </mat-form-field>
+          <mat-form-field *ngIf="valido">
+            <mat-label>Titulo do livro</mat-label>
+            <input
+            disabled
+            matInput
+            [value]="nomeLivro">
+          </mat-form-field>
+
         </form>
 
       </div>

@@ -1,7 +1,7 @@
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Autor from 'src/app/global/models/autor.model';
 import ApiUrl from 'src/app/global/constant/api-urls.constant';
@@ -41,8 +41,8 @@ export class AutoresService {
     return this.http.get<Autor>(`${ApiUrl.urlBaseAutor}/${parametro}`)
   }
 
-  cadastrarAutor(autor: Autor):Observable<Autor>{
-    return this.http.post<Autor>(ApiUrl.urlBaseAutor,autor)
+  cadastrarAutor(autor: Autor):Observable<HttpResponse<Autor>>{
+    return this.http.post<Autor>(ApiUrl.urlBaseAutor,autor, {observe: "response"})
   }
 
   editar(autor: Autor):Observable<Autor>{

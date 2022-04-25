@@ -27,6 +27,30 @@ public class ClienteRestTest {
                 .statusCode(200)
                 .body(matchesJsonSchemaInClasspath("schemas/JsonSchemaLista.json"));
     }
+    
+    @Test
+    public void listarClientes() {
+    	
+    	 given()
+         .contentType(ContentType.JSON)
+         .when()
+         .get(URL)
+         .then()
+         .statusCode(200)
+         .body(matchesJsonSchemaInClasspath("schemas/JsonSchemaLista.json"));
+    }
+    
+    @Test
+    public void listarUmCliente() {
+    	String url = "/api/cliente/cola@stefanini.com";
+    	given()
+        .contentType(ContentType.JSON)
+        .when().body("")
+        .get(url)
+        .then()
+        .statusCode(200)
+        .body(matchesJsonSchemaInClasspath("schemas/JsonSchemaLista.json"));
+    }
 
 
 

@@ -1,3 +1,5 @@
+import { HttpHeaders } from '@angular/common/http';
+import { MessagemService } from './../../../core/services/messagem.service';
 import { ValidarDataService } from './../../../core/services/validar-data.service';
 import { EmailValidator } from 'src/app/global/validators/email.validator';
 import { Router } from '@angular/router';
@@ -26,7 +28,8 @@ export class CadastrarAutoresComponent implements OnInit {
   constructor(
     private service: AutoresService,
     private router: Router,
-    private dataService: ValidarDataService
+    private dataService: ValidarDataService,
+    private messagem: MessagemService
   ) { }
 
   ngOnInit(): void {
@@ -63,12 +66,17 @@ export class CadastrarAutoresComponent implements OnInit {
     const novoAutor = this.novoAutorForm.getRawValue() as Autor;
           this.service.cadastrarAutor(novoAutor).subscribe(
             sucsess => {
-              this.service.showMessage('Autor cadastrado com sucesso')
+              console.log(sucsess.status)
+              this.messagem.success('Autor cadastrado com sucesso')
               this.router.navigate(['/autores/listar'])
             },
             error => {
-              this.service.showMessage('Email já cadastrado')
-              console.log(error)
+              if(error.status == 400){
+              this.service.showMessage('Email ou ISNB já cadastrado')
+              }else if(error.status == 500){
+                this.service.showMessage('Problema no servidor')
+                console.log(error)
+              }
             }
           )
   }

@@ -17,6 +17,8 @@ export class CadastrarLivrosComponent implements OnInit {
   @ViewChild('isbn')
   isnb!: ElementRef;
 
+  nomeLivro: string = ''
+  qtLivros: number = 0
   novoClienteForm!: FormGroup
   valido: boolean = false
   invalido: boolean = false
@@ -80,6 +82,8 @@ export class CadastrarLivrosComponent implements OnInit {
   valor(even:any){
     this.service.validarISBN(even).subscribe(
       e => {
+        this.nomeLivro = e.title
+        this.qtLivros = e.number_of_pages
         this.valido = true
         this.invalido = false
         console.log(even)

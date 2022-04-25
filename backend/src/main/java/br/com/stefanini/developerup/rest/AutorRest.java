@@ -61,9 +61,16 @@ public class AutorRest {
 	@APIResponse(responseCode = "201", description = "AutorDto", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = AutorDto.class)) })
 	public Response create(AutorDto autor) throws Exception {
-		service.inserir(autor);
-		return Response.status(Response.Status.CREATED).build();
-
+		try {
+			service.inserir(autor);
+			return Response.status(Response.Status.CREATED).build();					
+		} catch (RuntimeException error) {
+			error.printStackTrace();
+			return Response.status(Response.Status.BAD_REQUEST).entity("Erro ao inserir!! campo email ou ISNB já existente").build();
+		}catch (Exception error) {
+            error.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR ao inserir! Problema no servidor!").build();
+        }
 	}
 
 	@DELETE

@@ -5,12 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 @Table(name = "autor")
 public class Autor extends PanacheEntityBase {
 
+	//@Length(max = 10)
 	@Column(name = "nome")
 	private String nome;
 

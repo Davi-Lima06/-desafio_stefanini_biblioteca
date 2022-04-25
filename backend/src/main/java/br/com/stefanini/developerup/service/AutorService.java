@@ -31,11 +31,21 @@ public class AutorService {
 			return autor.getISNI().equals(id);
 		}).findFirst().get();
 	}
+	public Boolean listarPorEmail(String id){// lista um autor por email
+		return  dao.list().stream().map(AutorParser.get()::dto).filter(autor -> {
+			return autor.getEmail().equals(id);
+		}).findFirst().isPresent();
+	}
 	
 	@Transactional
-	public void inserir(AutorDto autor) {// insere um novo autor
+	public void inserir(AutorDto autor) throws Exception{// insere um novo autor
 		this.validar(autor);
-		dao.inserir(AutorParser.get().parserAutor(autor));
+		if(listarPorEmail(autor.getEmail())) {
+			throw new RuntimeException ("Já tem esse email");
+		}else {
+			dao.inserir(AutorParser.get().parserAutor(autor));
+			
+		}
 	}
 	
 	@Transactional
