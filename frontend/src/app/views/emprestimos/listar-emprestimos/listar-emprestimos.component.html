@@ -1,9 +1,9 @@
 
 <mat-form-field class="example-full-width espaco" appearance="fill">
-  <mat-label>pesquisa não implementada</mat-label>
-  <input matInput disabled >
+  <mat-label>pesquisar na tabela</mat-label>
+  <input matInput placeholder="Pesquisar emprestimos" #input
+  (keyup)="applyFilter($event)" >
 </mat-form-field>
-
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>

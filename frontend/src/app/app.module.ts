@@ -30,6 +30,9 @@ import { ListarAutoresComponent } from './views/autores/listar-autores/listar-au
 import { MatListModule} from '@angular/material/list';
 
 import {  MatPaginatorModule } from '@angular/material/paginator';
+import {  MatMenuModule } from '@angular/material/menu';
+import {  MatIconModule } from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
 import { CadastrarAutoresComponent } from './views/autores/cadastrar-autores/cadastrar-autores.component';
 import { EditarAutoresComponent } from './views/autores/editar-autores/editar-autores.component';
 import { DeletarAutoresComponent } from './views/autores/deletar-autores/deletar-autores.component';
@@ -90,6 +93,10 @@ import { CadastrarEmprestimosComponent } from './views/emprestimos/cadastrar-emp
     MatListModule,
     MatOptionModule,
     MatSelectModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatIconModule,
+
 
     ReactiveFormsModule,
     FormsModule,

@@ -42,7 +42,7 @@ export class ListarClientesComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = (event.target as HTMLInputElement).value
       .trim()
       .toLowerCase();
-    console.log(this.dataSource.filter);
+   // console.log(this.dataSource.data);
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
