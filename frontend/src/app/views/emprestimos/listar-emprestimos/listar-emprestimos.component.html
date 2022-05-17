@@ -1,7 +1,7 @@
 
 <mat-form-field class="example-full-width espaco" appearance="fill">
-  <mat-label>pesquisa não implementada</mat-label>
-  <input matInput disabled >
+  <mat-label>pesquisar na tabela</mat-label>
+  <input matInput (keyup)="applyFilter($event)" >
 </mat-form-field>
 
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -10,12 +10,12 @@
 
   <ng-container matColumnDef="cliente">
     <mat-header-cell *matHeaderCellDef> Nome do Cliente</mat-header-cell>
-    <mat-cell *matCellDef="let row"  > {{row.cliente.nome}} </mat-cell>
+    <mat-cell *matCellDef="let row"  > {{row.cliente}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="livro">
     <mat-header-cell *matHeaderCellDef> Nome do Livro  </mat-header-cell>
-    <mat-cell  *matCellDef="let row"> {{row.livro.nomeLivro}} </mat-cell>
+    <mat-cell  *matCellDef="let row"> {{row.livro}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="data">
@@ -32,7 +32,6 @@
       <button routerLink="/emprestimos/devolver/{{row.id}}" mat-raised-button color="warn" class="">
         Devolver&nbsp;&nbsp;
       </button>
-
     </mat-cell>
   </ng-container>
 

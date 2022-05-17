@@ -10,6 +10,7 @@ import javax.ws.rs.NotFoundException;
 
 import br.com.stefanini.developerup.dao.EmprestimoDao;
 import br.com.stefanini.developerup.dto.EmprestimoDto;
+import br.com.stefanini.developerup.dto.ModeloEmprestimoDto;
 import br.com.stefanini.developerup.model.Cliente;
 import br.com.stefanini.developerup.model.Emprestimo;
 import br.com.stefanini.developerup.model.Livro;
@@ -29,6 +30,10 @@ public class EmprestimoService {
 	
     public List<EmprestimoDto> listar(){
     	return dao.list().stream().map(EmprestimoParser.get()::dto).collect(Collectors.toList());
+    }
+
+    public List<ModeloEmprestimoDto> listarModelo(){
+    	return dao.list().stream().map(EmprestimoParser.get()::parseModelo).collect(Collectors.toList());
     }
     
     public EmprestimoDto listarUmEmprestimo(Long parametro) {

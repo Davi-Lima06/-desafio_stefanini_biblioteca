@@ -3,6 +3,7 @@ import Emprestimo from 'src/app/global/models/emprestimo.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import ModeloEmprestimo from 'src/app/global/models/modeloEmprestimo.model';
 
 @Component({
   selector: 'app-listar-emprestimos',
@@ -13,8 +14,8 @@ export class ListarEmprestimosComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  emprestimo: Emprestimo[] = []
-  dataSource = new MatTableDataSource<Emprestimo>([]);
+  emprestimo: ModeloEmprestimo[] = []
+  dataSource = new MatTableDataSource<ModeloEmprestimo>([]);
   tamanho: number = 0;
   displayedColumns = ['cliente', 'livro', 'data', 'acoes'];
   constructor(private service: EmprestimosService, private render: Renderer2) {}
@@ -27,6 +28,16 @@ export class ListarEmprestimosComponent implements OnInit {
     });
   }
 
+  applyFilter(event: Event) {
+    this.dataSource.filter = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+    console.log(this.dataSource.filter);
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

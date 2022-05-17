@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Emprestimo from 'src/app/global/models/emprestimo.model';
+import ModeloEmprestimo from 'src/app/global/models/modeloEmprestimo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,9 @@ export class EmprestimosService {
     })
   }
 
-  listarEmprestimos(): Observable<Emprestimo[]> {
+  listarEmprestimos(): Observable<ModeloEmprestimo[]> {
     return this.http
-      .get<Emprestimo[]>(ApiUrl.urlBaseEmprestimos)
+      .get<ModeloEmprestimo[]>(ApiUrl.urlBaseEmprestimos)
       .pipe(map((res) => res.map((c, i) => ({ ...c, posicao: i }))));
   }
 
