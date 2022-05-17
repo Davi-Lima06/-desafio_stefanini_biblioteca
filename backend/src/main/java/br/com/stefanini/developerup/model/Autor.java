@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Length;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
