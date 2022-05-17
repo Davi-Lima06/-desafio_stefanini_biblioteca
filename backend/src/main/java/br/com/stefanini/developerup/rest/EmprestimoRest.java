@@ -33,7 +33,7 @@ public class EmprestimoRest {
 	@APIResponse(responseCode = "200", description = "EmprestimoDto", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = EmprestimoDto.class)) })
 	public Response listar() {
-		return Response.status(Response.Status.OK).entity(service.listar()).build();
+		return Response.status(Response.Status.OK).entity(service.listarModelo()).build();
 	}
 	
 	@GET
