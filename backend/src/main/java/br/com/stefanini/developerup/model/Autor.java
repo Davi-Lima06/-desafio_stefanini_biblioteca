@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Length;
-
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
@@ -20,7 +18,7 @@ public class Autor extends PanacheEntityBase {
 	@Id
 	private Long ISNI;
 
-	@Column(name = "email")
+	@Column(name = "email") 
 	private String email;
 
 	@Column(name = "dataNascimento")

@@ -37,7 +37,7 @@ export class ListarAutoresComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
 
     this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    console.log(this.dataSource.filter);
+
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
